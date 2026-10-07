@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MITTI & CANVAS '26 | Baroda Art Conclave - Navrachana University</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        offwhite: '#F5EFEE',
+                        sand: '#E9E0DC',
+                        redmud: {
+                            DEFAULT: '#8B2E16',
+                            hover: '#72240F',
+                            light: '#A3391C'
+                        },
+                        rust: {
+                            DEFAULT: '#C15C2B',
+                            hover: '#A84C1F',
+                            light: '#E07542'
+                        },
+                        charcoal: '#1C1A19',
+                        clayblack: '#12100F',
+                        ochre: '#D9822B'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        grotesk: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F5EFEE;
+            color: #1C1A19;
+            background-image: radial-gradient(#8B2E16 0.5px, transparent 0.5px), radial-gradient(#1C1A19 0.5px, #F5EFEE 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .brutal-border {
+            border: 3px solid #1C1A19;
+            box-shadow: 6px 6px 0px #1C1A19;
+        }
+
+        .brutal-border-sm {
+            border: 2px solid #1C1A19;
+            box-shadow: 4px 4px 0px #1C1A19;
+        }
+
+        .brutal-border-red {
+            border: 3px solid #1C1A19;
+            box-shadow: 6px 6px 0px #8B2E16;
+        }
+
+        .brutal-btn {
+            transition: all 0.15s ease-in-out;
+        }
+
+        .brutal-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #1C1A19;
+        }
+
+        .brutal-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #1C1A19;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #E9E0DC;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8B2E16;
+            border: 2px solid #1C1A19;
+        }
+
+        /* Canvas pattern overlay */
+        .canvas-texture {
+            background-color: #F8F3EE;
+            background-image: linear-gradient(0deg, rgba(139, 46, 22, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 46, 22, 0.05) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-redmud selection:text-white custom-scrollbar">
+
+    <header class="sticky top-0 z-50 bg-offwhite border-b-4 border-charcoal px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Badge -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-redmud text-white font-syne text-2xl font-extrabold flex items-center justify-center brutal-border-sm transform group-hover:-rotate-6 transition-transform">
+                    M
+                </div>
+                <div>
+                    <span class="font-syne text-xl lg:text-2xl font-extrabold tracking-tight uppercase block leading-none">MITTI & CANVAS</span>
+                    <span class="font-grotesk text-xs font-bold tracking-widest text-rust uppercase">Navrachana University '26</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden lg:flex items-center gap-8 font-grotesk font-bold text-sm tracking-wider uppercase">
+                <a href="#about" class="hover:text-redmud transition-colors">Exhibition</a>
+                <a href="#studio" class="text-redmud font-extrabold flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rust animate-ping"></span> Interactive Studio
+                </a>
+                <a href="#disciplines" class="hover:text-redmud transition-colors">Art Tracks</a>
+                <a href="#schedule" class="hover:text-redmud transition-colors">Timeline</a>
+                <a href="#gallery" class="hover:text-redmud transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-redmud transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <a href="#register" class="bg-redmud hover:bg-redmud-hover text-white px-5 py-2.5 font-grotesk font-bold text-sm uppercase tracking-wider brutal-border-sm brutal-btn hidden sm:inline-flex items-center gap-2">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Register Now</span>
+                </a>
+                <button id="menuBtn" class="lg:hidden p-2.5 bg-sand brutal-border-sm text-charcoal">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden mt-3 p-6 bg-sand border-t-4 border-charcoal font-grotesk font-bold uppercase tracking-wider space-y-4">
+            <a href="#about" class="block py-2 border-b-2 border-charcoal/20">Exhibition Overview</a>
+            <a href="#studio" class="block py-2 border-b-2 border-charcoal/20 text-redmud">Interactive Studio</a>
+            <a href="#disciplines" class="block py-2 border-b-2 border-charcoal/20">Art Tracks</a>
+            <a href="#schedule" class="block py-2 border-b-2 border-charcoal/20">3-Day Schedule</a>
+            <a href="#gallery" class="block py-2 border-b-2 border-charcoal/20">Visual Gallery</a>
+            <a href="#contact" class="block py-2">Contact & Venue</a>
+            <a href="#register" class="block text-center bg-redmud text-white py-3 brutal-border-sm font-bold mt-4">
+                Get Pass / Register
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-12 lg:py-20 px-4 lg:px-8 border-b-4 border-charcoal relative overflow-hidden">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
+                <!-- Left Hero Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Venue Badge -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-charcoal text-white font-grotesk font-bold text-xs uppercase tracking-widest brutal-border-sm">
+                        <i class="fa-solid fa-location-dot text-rust"></i>
+                        Navrachana University • Vadodara, Gujarat
+                    </div>
+
+                    <!-- Main Bold Title -->
+                    <h1 class="font-syne text-4xl sm:text-6xl xl:text-7xl font-extrabold uppercase leading-[0.95] tracking-tight text-charcoal">
+                        RAW MITTI.<br>
+                        <span class="text-redmud bg-sand px-2 py-0.5 inline-block brutal-border-sm my-1">BOLD CANVAS.</span><br>
+                        PURE CRAFT.
+                    </h1>
+
+                    <p class="font-sans text-lg sm:text-xl font-medium text-charcoal/90 max-w-2xl leading-relaxed">
+                        The ultimate multidisciplinary art conclave at Navrachana University. Experience wheel throwing, clay sculpture, heavy impasto canvas painting, and live ceramic kiln firings under master Indian artists.
+                    </p>
+
+                    <!-- Exact Address Banner -->
+                    <div class="p-4 bg-sand brutal-border-sm font-grotesk text-xs sm:text-sm space-y-1">
+                        <span class="font-extrabold text-redmud uppercase block"><i class="fa-solid fa-map-pin me-2"></i> Venue Address:</span>
+                        <p class="font-bold text-charcoal">
+                            Navrachana University, Vasna - Bhayli Main Rd, Bhayli, Vadodara, Gujarat 391410, India
+                        </p>
+                    </div>
+
+                    <!-- Countdown Timer Bar -->
+                    <div class="p-4 bg-offwhite brutal-border-sm flex flex-wrap items-center justify-between gap-4">
+                        <span class="font-grotesk font-extrabold text-xs uppercase tracking-wider text-charcoal">Conclave Starts In:</span>
+                        <div class="flex items-center gap-3 font-grotesk font-extrabold text-sm sm:text-base">
+                            <div class="bg-redmud text-white px-3 py-1 brutal-border-sm text-center">
+                                <span id="days">14</span><span class="text-[10px] block font-normal">DAYS</span>
+                            </div>
+                            <div class="bg-rust text-white px-3 py-1 brutal-border-sm text-center">
+                                <span id="hours">08</span><span class="text-[10px] block font-normal">HRS</span>
+                            </div>
+                            <div class="bg-charcoal text-white px-3 py-1 brutal-border-sm text-center">
+                                <span id="mins">45</span><span class="text-[10px] block font-normal">MINS</span>
+                            </div>
+                            <div class="bg-ochre text-white px-3 py-1 brutal-border-sm text-center">
+                                <span id="secs">12</span><span class="text-[10px] block font-normal">SECS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Group -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                        <a href="#register" class="px-8 py-4 bg-redmud text-white font-grotesk font-extrabold text-base uppercase tracking-wider brutal-border brutal-btn text-center flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-hands-holding-circle text-xl"></i>
+                            <span>Register For Workshops</span>
+                        </a>
+                        <a href="#studio" class="px-8 py-4 bg-sand text-charcoal font-grotesk font-extrabold text-base uppercase tracking-wider brutal-border brutal-btn text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paintbrush text-rust"></i>
+                            <span>Try Interactive Studio</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Hero Graphic / Poster -->
+                <div class="lg:col-span-5 relative">
+                    <div class="bg-clayblack p-6 brutal-border-red text-white space-y-6 relative">
+                        <!-- Top Tag -->
+                        <div class="flex items-center justify-between border-b-2 border-white/20 pb-4">
+                            <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-rust">Art Conclave '26</span>
+                            <span class="font-grotesk font-bold text-xs bg-redmud px-2.5 py-1 text-white uppercase">Nov 14-16</span>
+                        </div>
+
+                        <!-- Main Image Artwork -->
+                        <div class="relative aspect-square overflow-hidden brutal-border-sm">
+                            <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=800" alt="Clay wheel sculpture" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-clayblack via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 p-3 bg-redmud/90 backdrop-blur-md brutal-border-sm text-white">
+                                <span class="font-grotesk text-[10px] uppercase font-bold tracking-widest block text-sand">Live Master Demo</span>
+                                <h3 class="font-syne font-bold text-lg">Traditional Terracotta & Clay Impasto</h3>
+                            </div>
+                        </div>
+
+                        <!-- Stats Row -->
+                        <div class="grid grid-cols-3 gap-2 font-grotesk text-center">
+                            <div class="p-2 bg-charcoal border border-white/10">
+                                <span class="block font-syne font-extrabold text-xl text-rust">18+</span>
+                                <span class="text-[10px] uppercase font-bold text-sand">Workshops</span>
+                            </div>
+                            <div class="p-2 bg-charcoal border border-white/10">
+                                <span class="block font-syne font-extrabold text-xl text-rust">200+</span>
+                                <span class="text-[10px] uppercase font-bold text-sand">Artworks</span>
+                            </div>
+                            <div class="p-2 bg-charcoal border border-white/10">
+                                <span class="block font-syne font-extrabold text-xl text-rust">₹0</span>
+                                <span class="text-[10px] uppercase font-bold text-sand">Gallery Pass</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="studio" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal bg-sand">
+            <div class="max-w-7xl mx-auto space-y-10">
+                <!-- Section Header -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-4 border-charcoal pb-6">
+                    <div>
+                        <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-redmud block">Hands-On Digital Lab</span>
+                        <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-charcoal">Interactive Craft & Canvas Studio</h2>
+                    </div>
+                    <!-- Mode Switcher Tabs -->
+                    <div class="flex items-center gap-2 p-1 bg-charcoal brutal-border-sm self-start lg:self-auto">
+                        <button id="modeClayBtn" class="px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-redmud text-white transition-all">
+                            <i class="fa-solid fa-compact-disc me-2"></i> 1. Ceramic Wheel Studio
+                        </button>
+                        <button id="modeCanvasBtn" class="px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-transparent text-sand hover:text-white transition-all">
+                            <i class="fa-solid fa-palette me-2"></i> 2. Impasto Canvas Painter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Studio Application Main Box -->
+                <div class="bg-offwhite brutal-border p-4 lg:p-8 grid lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Left: Canvas Area -->
+                    <div class="lg:col-span-8 flex flex-col items-center justify-center bg-clayblack p-4 brutal-border relative min-h-[420px]">
+                        <!-- Tool Header Overlay -->
+                        <div class="w-full flex items-center justify-between text-sand font-grotesk text-xs pb-3 mb-2 border-b border-white/20">
+                            <span id="activeStudioTitle" class="font-bold text-rust uppercase"><i class="fa-solid fa-arrows-spin me-1"></i> Mode: Ceramic Clay Lathe</span>
+                            <button id="clearStudioCanvas" class="hover:text-white bg-redmud px-3 py-1 font-bold brutal-border-sm text-[11px] uppercase">
+                                <i class="fa-solid fa-rotate-left me-1"></i> Reset Studio
+                            </button>
+                        </div>
+
+                        <!-- HTML Canvas Element -->
+                        <canvas id="studioCanvas" width="540" height="360" class="cursor-crosshair max-w-full bg-offwhite brutal-border-sm"></canvas>
+
+                        <!-- Bottom Help Instruction -->
+                        <p id="studioInstructions" class="text-sand font-grotesk text-xs mt-3 text-center">
+                            <i class="fa-solid fa-hand-pointer text-rust me-1"></i> Drag left/right on canvas to shape pottery width, or paint with loaded pigments!
+                        </p>
+                    </div>
+
+                    <!-- Right: Tool Controls Panel -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <!-- Clay Wheel Controls (Active by Default) -->
+                        <div id="clayControls" class="space-y-5">
+                            <h3 class="font-syne font-bold text-xl border-b-2 border-charcoal pb-2 text-charcoal">Clay Lathe Parameters</h3>
+                            
+                            <div class="space-y-4 font-grotesk">
+                                <div>
+                                    <label class="text-xs font-bold uppercase flex justify-between text-charcoal">
+                                        <span>Rim / Neck Width</span>
+                                        <span id="rimDisplay">Standard</span>
+                                    </label>
+                                    <input type="range" id="rimSlider" min="20" max="90" value="50" class="w-full accent-redmud mt-1">
+                                </div>
+
+                                <div>
+                                    <label class="text-xs font-bold uppercase flex justify-between text-charcoal">
+                                        <span>Belly Bulge</span>
+                                        <span id="bellyDisplay">Full</span>
+                                    </label>
+                                    <input type="range" id="bellySlider" min="30" max="115" value="80" class="w-full accent-redmud mt-1">
+                                </div>
+
+                                <div>
+                                    <label class="text-xs font-bold uppercase flex justify-between text-charcoal">
+                                        <span>Height</span>
+                                        <span id="heightDisplay">Tall</span>
+                                    </label>
+                                    <input type="range" id="heightSlider" min="120" max="220" value="175" class="w-full accent-redmud mt-1">
+                                </div>
+
+                                <div>
+                                    <label class="text-xs font-bold uppercase block text-charcoal mb-2">Select Terracotta Glaze</label>
+                                    <div class="grid grid-cols-4 gap-2" id="glazeSwatches">
+                                        <button data-color="#8B2E16" class="glaze-btn h-10 bg-[#8B2E16] brutal-border-sm flex items-center justify-center text-white font-bold" title="Red Mud"></button>
+                                        <button data-color="#C15C2B" class="glaze-btn h-10 bg-[#C15C2B] brutal-border-sm flex items-center justify-center text-white font-bold" title="Rust Orange"></button>
+                                        <button data-color="#D9822B" class="glaze-btn h-10 bg-[#D9822B] brutal-border-sm flex items-center justify-center text-white font-bold" title="Raw Ochre"></button>
+                                        <button data-color="#1C1A19" class="glaze-btn h-10 bg-[#1C1A19] brutal-border-sm flex items-center justify-center text-white font-bold" title="Smoked Charcoal"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Painter Controls (Hidden by Default) -->
+                        <div id="canvasControls" class="space-y-5 hidden">
+                            <h3 class="font-syne font-bold text-xl border-b-2 border-charcoal pb-2 text-charcoal">Impasto Brush Tools</h3>
+                            
+                            <div class="space-y-4 font-grotesk">
+                                <div>
+                                    <label class="text-xs font-bold uppercase block text-charcoal mb-2">Paint Color Palette</label>
+                                    <div class="grid grid-cols-5 gap-2" id="paintSwatches">
+                                        <button data-color="#8B2E16" class="paint-btn h-9 bg-[#8B2E16] brutal-border-sm"></button>
+                                        <button data-color="#C15C2B" class="paint-btn h-9 bg-[#C15C2B] brutal-border-sm"></button>
+                                        <button data-color="#D9822B" class="paint-btn h-9 bg-[#D9822B] brutal-border-sm"></button>
+                                        <button data-color="#1C1A19" class="paint-btn h-9 bg-[#1C1A19] brutal-border-sm"></button>
+                                        <button data-color="#F5EFEE" class="paint-btn h-9 bg-[#F5EFEE] brutal-border-sm"></button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="text-xs font-bold uppercase flex justify-between text-charcoal">
+                                        <span>Brush Stroke Size</span>
+                                        <span id="brushSizeDisplay">15px</span>
+                                    </label>
+                                    <input type="range" id="brushSizeSlider" min="5" max="45" value="15" class="w-full accent-rust mt-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <button id="saveArtworkBtn" class="w-full py-3.5 bg-redmud text-white font-grotesk font-extrabold text-sm uppercase tracking-wider brutal-border-sm brutal-btn flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Save Artwork Design</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="disciplines" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-rust">Multidisciplinary Art Conclave</span>
+                    <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-charcoal">Exhibition Tracks & Workshops</h2>
+                    <div class="w-24 h-2 bg-redmud mx-auto"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Track 1: Pottery -->
+                    <div class="bg-offwhite p-6 brutal-border flex flex-col justify-between space-y-6 hover:bg-sand transition-colors">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 bg-redmud text-white font-syne font-extrabold text-2xl flex items-center justify-center brutal-border-sm">
+                                01
+                            </div>
+                            <h3 class="font-syne text-xl font-bold text-charcoal uppercase">Pottery & Wheel Throwing</h3>
+                            <p class="font-sans text-xs text-charcoal/80 leading-relaxed">
+                                Centering raw clay on spinning wheels, pulling cylinders, Raku kiln firings, and glazed vessel craftsmanship.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-charcoal font-grotesk text-xs flex justify-between items-center">
+                            <span class="font-bold text-redmud">₹499 / Pass</span>
+                            <button onclick="quickSelectWorkshop('Wheel Throwing', 499)" class="font-extrabold underline hover:text-rust">Select Track →</button>
+                        </div>
+                    </div>
+
+                    <!-- Track 2: Clay Sculpture -->
+                    <div class="bg-offwhite p-6 brutal-border flex flex-col justify-between space-y-6 hover:bg-sand transition-colors">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 bg-rust text-white font-syne font-extrabold text-2xl flex items-center justify-center brutal-border-sm">
+                                02
+                            </div>
+                            <h3 class="font-syne text-xl font-bold text-charcoal uppercase">Clay Relief & Sculpting</h3>
+                            <p class="font-sans text-xs text-charcoal/80 leading-relaxed">
+                                Slab construction, Kutchi Lippan mud-relief art, terracotta figurines, and handbuilding techniques.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-charcoal font-grotesk text-xs flex justify-between items-center">
+                            <span class="font-bold text-redmud">₹699 / Pass</span>
+                            <button onclick="quickSelectWorkshop('Clay Sculpting', 699)" class="font-extrabold underline hover:text-rust">Select Track →</button>
+                        </div>
+                    </div>
+
+                    <!-- Track 3: Canvas Painting -->
+                    <div class="bg-offwhite p-6 brutal-border flex flex-col justify-between space-y-6 hover:bg-sand transition-colors">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 bg-ochre text-white font-syne font-extrabold text-2xl flex items-center justify-center brutal-border-sm">
+                                03
+                            </div>
+                            <h3 class="font-syne text-xl font-bold text-charcoal uppercase">Fine Art & Canvas Impasto</h3>
+                            <p class="font-sans text-xs text-charcoal/80 leading-relaxed">
+                                Palette knife painting, raw earth pigments, acrylic heavy impasto, gouache, and oil pastel expressions.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-charcoal font-grotesk text-xs flex justify-between items-center">
+                            <span class="font-bold text-redmud">₹799 / Pass</span>
+                            <button onclick="quickSelectWorkshop('Canvas Painting', 799)" class="font-extrabold underline hover:text-rust">Select Track →</button>
+                        </div>
+                    </div>
+
+                    <!-- Track 4: Mixed Media -->
+                    <div class="bg-offwhite p-6 brutal-border flex flex-col justify-between space-y-6 hover:bg-sand transition-colors">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 bg-charcoal text-white font-syne font-extrabold text-2xl flex items-center justify-center brutal-border-sm">
+                                04
+                            </div>
+                            <h3 class="font-syne text-xl font-bold text-charcoal uppercase">Mixed Media & Mud Fusion</h3>
+                            <p class="font-sans text-xs text-charcoal/80 leading-relaxed">
+                                Combining recycled terracotta grit, fiber art, resin-mud casting, and experimental materials.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-charcoal font-grotesk text-xs flex justify-between items-center">
+                            <span class="font-bold text-redmud">₹899 / Pass</span>
+                            <button onclick="quickSelectWorkshop('Mixed Media', 899)" class="font-extrabold underline hover:text-rust">Select Track →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="register" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal bg-clayblack text-white">
+            <div class="max-w-4xl mx-auto space-y-10">
+                <div class="text-center space-y-3">
+                    <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-rust">Navrachana University Pass Portal</span>
+                    <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase">Register & Claim Event Pass</h2>
+                    <p class="font-sans text-sm text-sand/80 max-w-lg mx-auto">
+                        Join us as an art participant or get a free visitor exhibition pass.
+                    </p>
+                </div>
+
+                <form id="conclaveForm" class="bg-charcoal p-6 sm:p-10 brutal-border-red space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6 font-grotesk">
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Full Name *</label>
+                            <input type="text" id="regName" required placeholder="e.g. Aarav Mehta" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-rust">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Email Address *</label>
+                            <input type="email" id="regEmail" required placeholder="name@domain.com" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-rust">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Mobile Number *</label>
+                            <input type="tel" id="regPhone" required placeholder="+91 98765 43210" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-rust">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Participant Category</label>
+                            <select id="regCategory" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white focus:outline-none focus:border-rust">
+                                <option value="NUV Student">NUV Student / Faculty</option>
+                                <option value="External Student">External College Student</option>
+                                <option value="Independent Artist">Independent Artist</option>
+                                <option value="General Public">General Visitor</option>
+                            </select>
+                        </div>
+
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Select Workshop / Pass Type *</label>
+                            <select id="regWorkshop" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white focus:outline-none focus:border-rust">
+                                <option value="Free Exhibition Pass" data-price="0">Free Exhibition Visitor Pass (Access to Galleries)</option>
+                                <option value="Wheel Throwing" data-price="499">Pottery & Wheel Throwing Track (₹499)</option>
+                                <option value="Clay Sculpting" data-price="699">Clay Relief & Sculpting Track (₹699)</option>
+                                <option value="Canvas Painting" data-price="799">Fine Art Canvas & Impasto Track (₹799)</option>
+                                <option value="Mixed Media" data-price="899">Mixed Media & Mud Fusion Track (₹899)</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Preferred Date</label>
+                            <select id="regDate" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white focus:outline-none focus:border-rust">
+                                <option value="Nov 14, 2026">Friday, Nov 14, 2026</option>
+                                <option value="Nov 15, 2026">Saturday, Nov 15, 2026</option>
+                                <option value="Nov 16, 2026">Sunday, Nov 16, 2026</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase font-bold text-sand">Time Slot</label>
+                            <select id="regTime" class="w-full px-4 py-3 bg-clayblack border-2 border-white/20 text-white focus:outline-none focus:border-rust">
+                                <option value="10:00 AM - 01:00 PM">Morning Slot (10:00 AM - 01:00 PM)</option>
+                                <option value="02:00 PM - 05:00 PM">Afternoon Slot (02:00 PM - 05:00 PM)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Price Display Bar -->
+                    <div class="p-4 bg-clayblack border-2 border-white/10 flex items-center justify-between font-grotesk">
+                        <span class="text-xs uppercase tracking-wider text-sand">Total Registration Fee:</span>
+                        <span id="priceTag" class="font-syne font-extrabold text-2xl text-rust">₹0 (Free Pass)</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-redmud text-white font-grotesk font-extrabold text-base uppercase tracking-wider brutal-border-sm brutal-btn flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <span>Generate Instant Pass</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal">
+            <div class="max-w-5xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-rust">3-Day Agenda</span>
+                    <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-charcoal">Masterclass Timeline</h2>
+                </div>
+
+                <!-- Day Selector -->
+                <div class="flex justify-center gap-2 p-1.5 bg-sand brutal-border-sm max-w-md mx-auto font-grotesk font-extrabold text-xs uppercase">
+                    <button class="day-tab flex-1 py-3 bg-redmud text-white transition-all" data-day="day1">Day 1 (Nov 14)</button>
+                    <button class="day-tab flex-1 py-3 bg-transparent text-charcoal hover:bg-offwhite transition-all" data-day="day2">Day 2 (Nov 15)</button>
+                    <button class="day-tab flex-1 py-3 bg-transparent text-charcoal hover:bg-offwhite transition-all" data-day="day3">Day 3 (Nov 16)</button>
+                </div>
+
+                <!-- Dynamic Timeline Container -->
+                <div id="timelineContainer" class="space-y-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal bg-sand">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-redmud">Exhibition Highlights</span>
+                    <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-charcoal">Conclave Visual Gallery</h2>
+                </div>
+
+                <!-- Gallery Filters -->
+                <div class="flex flex-wrap justify-center gap-2 font-grotesk font-bold text-xs uppercase" id="galleryFilters">
+                    <button class="filter-btn px-5 py-2.5 bg-redmud text-white brutal-border-sm" data-filter="all">All Artworks</button>
+                    <button class="filter-btn px-5 py-2.5 bg-offwhite text-charcoal brutal-border-sm hover:bg-white" data-filter="pottery">Pottery & Ceramics</button>
+                    <button class="filter-btn px-5 py-2.5 bg-offwhite text-charcoal brutal-border-sm hover:bg-white" data-filter="canvas">Canvas & Painting</button>
+                    <button class="filter-btn px-5 py-2.5 bg-offwhite text-charcoal brutal-border-sm hover:bg-white" data-filter="sculpture">Clay Relief</button>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                    <!-- Item 1 -->
+                    <div class="gallery-card pottery bg-offwhite brutal-border overflow-hidden cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=1000', 'Terracotta Water Vessel', 'Pottery & Ceramics • Devjibhai Prajapati')">
+                        <div class="h-64 bg-clayblack relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=600" alt="Terracotta Vessel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 font-grotesk">
+                            <span class="text-[10px] font-extrabold uppercase text-redmud block">Pottery & Ceramics</span>
+                            <h4 class="font-syne font-bold text-lg text-charcoal">Terracotta Water Vessel</h4>
+                            <p class="text-xs text-charcoal/70">By Master Devjibhai Prajapati</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="gallery-card canvas bg-offwhite brutal-border overflow-hidden cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&q=80&w=1000', 'Red Mud & Earth Impasto', 'Fine Art Canvas • Ananya Shah')">
+                        <div class="h-64 bg-clayblack relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&q=80&w=600" alt="Impasto Painting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 font-grotesk">
+                            <span class="text-[10px] font-extrabold uppercase text-rust block">Fine Art Canvas</span>
+                            <h4 class="font-syne font-bold text-lg text-charcoal">Red Mud & Earth Impasto</h4>
+                            <p class="text-xs text-charcoal/70">By Ananya Shah (NUV Fine Arts)</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="gallery-card sculpture bg-offwhite brutal-border overflow-hidden cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=1000', 'Traditional Lippan Mud Plaque', 'Clay Relief • Kutch Guild')">
+                        <div class="h-64 bg-clayblack relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=600" alt="Mud Relief" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 font-grotesk">
+                            <span class="text-[10px] font-extrabold uppercase text-ochre block">Clay Relief</span>
+                            <h4 class="font-syne font-bold text-lg text-charcoal">Lippan Mud Mirror Plaque</h4>
+                            <p class="text-xs text-charcoal/70">By Kutchi Artisans Guild</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 lg:py-24 px-4 lg:px-8 border-b-4 border-charcoal">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="font-grotesk font-extrabold text-xs uppercase tracking-widest text-rust">Get In Touch</span>
+                    <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-charcoal">Questions & Venue Location</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Left Contact Info Box -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-offwhite p-6 sm:p-8 brutal-border space-y-6 font-grotesk">
+                            <h3 class="font-syne font-bold text-2xl uppercase text-charcoal">Conclave Contacts</h3>
+                            
+                            <div class="space-y-4 text-xs">
+                                <div class="p-4 bg-sand brutal-border-sm space-y-1">
+                                    <span class="font-bold text-redmud uppercase block">Event Chair & Lead</span>
+                                    <strong class="text-sm block text-charcoal">Prof. Mihir Trivedi</strong>
+                                    <p class="text-charcoal/80"><i class="fa-solid fa-envelope me-1"></i> artconclave@nuv.ac.in</p>
+                                </div>
+
+                                <div class="p-4 bg-sand brutal-border-sm space-y-1">
+                                    <span class="font-bold text-rust uppercase block">Workshop Helpline</span>
+                                    <strong class="text-sm block text-charcoal">+91 98250 12345 / +91 (0265) 2608100</strong>
+                                </div>
+                            </div>
+
+                            <!-- Address Card -->
+                            <div class="p-4 bg-clayblack text-white brutal-border-sm space-y-2">
+                                <span class="text-rust text-xs font-bold uppercase block"><i class="fa-solid fa-location-dot me-1"></i> Official Venue Address</span>
+                                <p class="text-xs text-sand leading-relaxed">
+                                    <strong>Navrachana University</strong><br>
+                                    Vasna - Bhayli Main Rd, Bhayli, Vadodara, Gujarat 391410, India
+                                </p>
+                                <a href="https://maps.google.com/?q=Navrachana+University,+Vasna+-+Bhayli+Main+Rd,+Bhayli,+Vadodara,+Gujarat+391410" target="_blank" class="inline-block mt-2 px-4 py-2 bg-redmud text-white text-[11px] font-bold uppercase tracking-wider brutal-border-sm">
+                                    Open Google Maps <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Inquiry Form & FAQ Accordion -->
+                    <div class="lg:col-span-7 space-y-6 font-grotesk">
+                        <!-- Direct Inquiry Box -->
+                        <div class="bg-offwhite p-6 sm:p-8 brutal-border space-y-4">
+                            <h3 class="font-syne font-bold text-xl uppercase text-charcoal">Have a Question? Send Us a Message</h3>
+                            <form id="inquiryForm" class="space-y-4">
+                                <div class="grid sm:grid-cols-2 gap-4 text-xs">
+                                    <input type="text" required placeholder="Your Name" class="px-4 py-3 bg-sand border-2 border-charcoal focus:outline-none focus:border-redmud">
+                                    <input type="email" required placeholder="Your Email" class="px-4 py-3 bg-sand border-2 border-charcoal focus:outline-none focus:border-redmud">
+                                </div>
+                                <textarea required rows="3" placeholder="Write your question regarding workshops, materials, or student entries..." class="w-full p-4 bg-sand border-2 border-charcoal text-xs focus:outline-none focus:border-redmud"></textarea>
+                                <button type="submit" class="px-6 py-3 bg-redmud text-white font-extrabold text-xs uppercase tracking-wider brutal-border-sm brutal-btn">
+                                    Submit Question
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- FAQ Accordion -->
+                        <div class="bg-offwhite p-6 sm:p-8 brutal-border space-y-4">
+                            <h3 class="font-syne font-bold text-xl uppercase text-charcoal">Frequently Asked Questions</h3>
+                            <div class="space-y-3" id="faqAccordion">
+                                <div class="border-2 border-charcoal bg-sand">
+                                    <button class="faq-btn w-full p-4 text-left font-bold text-xs uppercase flex justify-between items-center text-charcoal">
+                                        <span>Will raw clay and canvas materials be provided?</span>
+                                        <i class="fa-solid fa-plus text-redmud"></i>
+                                    </button>
+                                    <div class="faq-ans hidden p-4 pt-0 text-xs text-charcoal/80 border-t-2 border-charcoal/20">
+                                        Yes! All raw clay, aprons, canvas panels, palette knives, earth pigments, and wheel access are provided at Navrachana University studios.
+                                    </div>
+                                </div>
+
+                                <div class="border-2 border-charcoal bg-sand">
+                                    <button class="faq-btn w-full p-4 text-left font-bold text-xs uppercase flex justify-between items-center text-charcoal">
+                                        <span>Can I take my completed artwork home?</span>
+                                        <i class="fa-solid fa-plus text-redmud"></i>
+                                    </button>
+                                    <div class="faq-ans hidden p-4 pt-0 text-xs text-charcoal/80 border-t-2 border-charcoal/20">
+                                        Canvas paintings can be taken immediately. Unfired clay pots can be taken in carry boxes, or left for kiln firing to be collected post-event.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-clayblack text-white border-t-4 border-charcoal py-10 px-4 lg:px-8 font-grotesk">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                <span class="font-syne font-extrabold text-2xl uppercase tracking-wider block text-sand">MITTI & CANVAS '26</span>
+                <p class="text-xs text-sand/70 mt-1">Navrachana University • School of Liberal Studies & Fine Arts</p>
+            </div>
+            <div class="text-xs text-sand/60 space-y-1">
+                <p>Navrachana University, Vasna - Bhayli Main Rd, Bhayli, Vadodara, Gujarat 391410</p>
+                <p>© 2026 MITTI & CANVAS Art Conclave. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ticketModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-offwhite max-w-md w-full brutal-border p-6 space-y-6 font-grotesk relative">
+            <button id="closeTicketModal" class="absolute top-4 right-4 font-bold text-xl text-charcoal hover:text-redmud">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-1 border-b-4 border-charcoal pb-4">
+                <span class="text-[10px] font-extrabold uppercase text-rust tracking-widest block">Official Pass</span>
+                <h3 class="font-syne font-extrabold text-2xl uppercase text-charcoal">Navrachana Event Pass</h3>
+            </div>
+
+            <!-- Pass Card Body -->
+            <div class="bg-sand p-4 brutal-border-sm space-y-3 text-xs">
+                <div class="flex justify-between items-start border-b-2 border-charcoal/20 pb-2">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-redmud block">Participant</span>
+                        <strong id="passName" class="font-syne text-base text-charcoal">Aarav Mehta</strong>
+                    </div>
+                    <span id="passBadge" class="px-2 py-1 bg-redmud text-white text-[10px] font-bold uppercase">Workshop</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <span class="text-[10px] text-charcoal/60 uppercase block">Track</span>
+                        <strong id="passTrack" class="text-charcoal block">Wheel Throwing</strong>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-charcoal/60 uppercase block">Date</span>
+                        <strong id="passDate" class="text-charcoal block">Nov 14, 2026</strong>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-charcoal/60 uppercase block">Venue</span>
+                        <span class="text-charcoal font-bold block">Arts Studio, NUV</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-charcoal/60 uppercase block">Pass ID</span>
+                        <span id="passId" class="text-redmud font-mono font-extrabold block">#NUV-9921</span>
+                    </div>
+                </div>
+
+                <!-- Simulated Barcode -->
+                <div class="pt-2 text-center border-t-2 border-charcoal/20">
+                    <div class="h-8 bg-charcoal/10 flex items-center justify-center gap-1 font-mono text-[9px] text-charcoal">
+                        ||| |||| | ||||| || |||| ||| |||||
+                    </div>
+                    <span class="text-[9px] uppercase font-bold text-charcoal/70">Scan at NUV Bhayli Gate Entrance</span>
+                </div>
+            </div>
+
+            <button onclick="downloadPass()" class="w-full py-3 bg-redmud text-white font-extrabold text-xs uppercase tracking-wider brutal-border-sm brutal-btn flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i>
+                <span>Download Pass PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4">
+        <div class="max-w-2xl w-full bg-offwhite brutal-border p-4 relative font-grotesk space-y-3">
+            <button id="closeLightbox" class="absolute top-2 right-2 p-2 bg-redmud text-white font-bold brutal-border-sm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="max-h-[65vh] overflow-hidden bg-clayblack flex items-center justify-center brutal-border-sm">
+                <img id="lightboxImg" src="" alt="Artwork" class="max-h-[65vh] object-contain">
+            </div>
+            <div>
+                <h3 id="lightboxTitle" class="font-syne font-bold text-xl text-charcoal uppercase"></h3>
+                <p id="lightboxDesc" class="text-xs text-charcoal/80"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-clayblack text-white px-5 py-3 brutal-border-red font-grotesk text-xs font-bold transition-all transform translate-y-20 opacity-0">
+        <span id="toastMsg">Notification message</span>
+    </div>
+
+    <script>
+        // Timeline Schedule Data
+        const scheduleData = {
+            day1: [
+                { time: "10:00 AM", title: "Keynote & Conclave Inauguration", speaker: "Vice Chancellor & Master Artisans", venue: "Auditorium" },
+                { time: "11:30 AM", title: "Centering Clay & Wheel Technique Demo", speaker: "Devjibhai Prajapati", venue: "Ceramics Studio" },
+                { time: "02:30 PM", title: "Fine Art Impasto Painting Workshop", speaker: "Prof. Mihir Trivedi", venue: "Canvas Gallery" }
+            ],
+            day2: [
+                { time: "10:00 AM", title: "Kutchi Lippan Relief Art Session", speaker: "Guild Masters", venue: "Relief Studio" },
+                { time: "02:00 PM", title: "Live Outdoor Raku Kiln Firing Demo", speaker: "Kiln Technicians", venue: "NUV Lawns" }
+            ],
+            day3: [
+                { time: "11:00 AM", title: "Mixed Media Mud-Resin Fusion", speaker: "Fine Arts Faculty", venue: "Studio B" },
+                { time: "04:00 PM", title: "Awards & Student Sculpture Auction", speaker: "Jury Panel", venue: "Amphitheatre" }
+            ]
+        };
+
+        // Application State Variables
+        let activeMode = 'clay'; // 'clay' or 'canvas'
+        let currentGlazeColor = '#8B2E16';
+        let currentBrushColor = '#8B2E16';
+        let brushSize = 15;
+        let isDrawing = false;
+
+        // Clay sliders state
+        let rimVal = 50;
+        let bellyVal = 80;
+        let heightVal = 175;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initMenu();
+            initCountdown();
+            renderTimeline('day1');
+            initTimelineTabs();
+            initGalleryFilters();
+            initStudio();
+            initForm();
+            initModalsAndFaq();
+        });
+
+        function initMenu() {
+            const btn = document.getElementById('menuBtn');
+            const menu = document.getElementById('mobileMenu');
+            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        }
+
+        function initCountdown() {
+            // Static countdown simulator logic
+            let totalSecs = (14 * 86400) + (8 * 3600) + (45 * 60) + 12;
+            setInterval(() => {
+                totalSecs--;
+                const d = Math.floor(totalSecs / 86400);
+                const h = Math.floor((totalSecs % 86400) / 3600);
+                const m = Math.floor((totalSecs % 3600) / 60);
+                const s = totalSecs % 60;
+
+                document.getElementById('days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('mins').innerText = String(m).padStart(2, '0');
+                document.getElementById('secs').innerText = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        function renderTimeline(dayKey) {
+            const container = document.getElementById('timelineContainer');
+            const items = scheduleData[dayKey] || [];
+            container.innerHTML = items.map(item => `
+                <div class="bg-offwhite p-4 sm:p-5 brutal-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-grotesk">
+                    <div class="flex items-center gap-4">
+                        <span class="px-3 py-1 bg-redmud text-white font-extrabold text-xs brutal-border-sm">${item.time}</span>
+                        <div>
+                            <h4 class="font-syne font-bold text-charcoal text-base">${item.title}</h4>
+                            <p class="text-xs text-charcoal/70"><i class="fa-solid fa-user-ninja text-rust me-1"></i> ${item.speaker}</p>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-sand text-charcoal font-bold text-xs border border-charcoal/30">
+                        <i class="fa-solid fa-location-dot me-1"></i> ${item.venue}
+                    </span>
+                </div>
+            `).join('');
+        }
+
+        function initTimelineTabs() {
+            const tabs = document.querySelectorAll('.day-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-redmud', 'text-white');
+                        t.classList.add('bg-transparent', 'text-charcoal');
+                    });
+                    tab.classList.add('bg-redmud', 'text-white');
+                    tab.classList.remove('bg-transparent', 'text-charcoal');
+                    renderTimeline(tab.dataset.day);
+                });
+            });
+        }
+
+        function initGalleryFilters() {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.gallery-card');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-redmud', 'text-white');
+                        b.classList.add('bg-offwhite', 'text-charcoal');
+                    });
+                    btn.classList.add('bg-redmud', 'text-white');
+                    btn.classList.remove('bg-offwhite', 'text-charcoal');
+
+                    const filter = btn.dataset.filter;
+                    cards.forEach(card => {
+                        if (filter === 'all' || card.classList.contains(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        function initStudio() {
+            const canvas = document.getElementById('studioCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const clayControls = document.getElementById('clayControls');
+            const canvasControls = document.getElementById('canvasControls');
+            const activeTitle = document.getElementById('activeStudioTitle');
+            const studioInstructions = document.getElementById('studioInstructions');
+
+            // Mode Switching
+            document.getElementById('modeClayBtn').addEventListener('click', () => {
+                activeMode = 'clay';
+                document.getElementById('modeClayBtn').className = "px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-redmud text-white transition-all";
+                document.getElementById('modeCanvasBtn').className = "px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-transparent text-sand hover:text-white transition-all";
+                clayControls.classList.remove('hidden');
+                canvasControls.classList.add('hidden');
+                activeTitle.innerHTML = `<i class="fa-solid fa-arrows-spin me-1"></i> Mode: Ceramic Clay Lathe`;
+                studioInstructions.innerHTML = `<i class="fa-solid fa-hand-pointer text-rust me-1"></i> Drag horizontally on canvas to shape pottery width!`;
+            });
+
+            document.getElementById('modeCanvasBtn').addEventListener('click', () => {
+                activeMode = 'canvas';
+                document.getElementById('modeCanvasBtn').className = "px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-redmud text-white transition-all";
+                document.getElementById('modeClayBtn').className = "px-5 py-2.5 font-grotesk font-bold text-xs uppercase tracking-wider bg-transparent text-sand hover:text-white transition-all";
+                canvasControls.classList.remove('hidden');
+                clayControls.classList.add('hidden');
+                activeTitle.innerHTML = `<i class="fa-solid fa-paintbrush me-1"></i> Mode: Impasto Canvas Painter`;
+                studioInstructions.innerHTML = `<i class="fa-solid fa-paintbrush text-rust me-1"></i> Click and drag on canvas to paint raw mud pigments!`;
+                
+                // Clear to offwhite canvas texture
+                ctx.fillStyle = '#F5EFEE';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+
+            // Clay Inputs
+            document.getElementById('rimSlider').addEventListener('input', (e) => rimVal = parseInt(e.target.value));
+            document.getElementById('bellySlider').addEventListener('input', (e) => bellyVal = parseInt(e.target.value));
+            document.getElementById('heightSlider').addEventListener('input', (e) => heightVal = parseInt(e.target.value));
+
+            // Glaze buttons
+            document.querySelectorAll('.glaze-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentGlazeColor = btn.dataset.color;
+                });
+            });
+
+            // Paint buttons & Brush Size
+            document.querySelectorAll('.paint-btn').forEach(btn => {
+                btn.addEventListener('click', () => currentBrushColor = btn.dataset.color);
+            });
+            document.getElementById('brushSizeSlider').addEventListener('input', (e) => {
+                brushSize = parseInt(e.target.value);
+                document.getElementById('brushSizeDisplay').innerText = `${brushSize}px`;
+            });
+
+            // Canvas Painting Listeners
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                if (activeMode === 'canvas') paintStroke(e);
+            });
+            window.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawing) {
+                    if (activeMode === 'canvas') {
+                        paintStroke(e);
+                    } else if (activeMode === 'clay') {
+                        const rect = canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        bellyVal = Math.max(30, Math.min(115, x / 4));
+                        document.getElementById('bellySlider').value = bellyVal;
+                    }
+                }
+            });
+
+            function paintStroke(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, brushSize / 2, 0, Math.PI * 2);
+                ctx.fillStyle = currentBrushColor;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Reset Button
+            document.getElementById('clearStudioCanvas').addEventListener('click', () => {
+                if (activeMode === 'canvas') {
+                    ctx.fillStyle = '#F5EFEE';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else {
+                    rimVal = 50; bellyVal = 80; heightVal = 175;
+                    document.getElementById('rimSlider').value = 50;
+                    document.getElementById('bellySlider').value = 80;
+                    document.getElementById('heightSlider').value = 175;
+                }
+                showToast("Studio canvas reset!");
+            });
+
+            // Save Artwork
+            document.getElementById('saveArtworkBtn').addEventListener('click', () => {
+                showToast("Artwork design downloaded!");
+            });
+
+            // Animation loop for Clay Wheel Mode
+            function renderStudioLoop() {
+                if (activeMode === 'clay') {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Off-white canvas fill
+                    ctx.fillStyle = '#F5EFEE';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    const cx = canvas.width / 2;
+                    const cy = canvas.height / 2 + 30;
+
+                    // Wheel base
+                    ctx.beginPath();
+                    ctx.ellipse(cx, cy + 50, 150, 30, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = '#1C1A19';
+                    ctx.fill();
+
+                    // Pot
+                    ctx.save();
+                    ctx.beginPath();
+
+                    const topY = cy - heightVal + 40;
+                    const bellyY = cy - (heightVal * 0.4);
+                    const baseY = cy + 30;
+
+                    ctx.moveTo(cx - rimVal, topY);
+                    ctx.bezierCurveTo(cx - (rimVal * 0.6), topY + 20, cx - bellyVal, bellyY - 20, cx - bellyVal, bellyY);
+                    ctx.bezierCurveTo(cx - bellyVal, bellyY + 30, cx - 35, baseY - 10, cx - 35, baseY);
+                    ctx.lineTo(cx + 35, baseY);
+                    ctx.bezierCurveTo(cx + 35, baseY - 10, cx + bellyVal, bellyY + 30, cx + bellyVal, bellyY);
+                    ctx.bezierCurveTo(cx + bellyVal, bellyY - 20, cx + (rimVal * 0.6), topY + 20, cx + rimVal, topY);
+
+                    ctx.closePath();
+                    ctx.fillStyle = currentGlazeColor;
+                    ctx.fill();
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = '#1C1A19';
+                    ctx.stroke();
+
+                    // Pot Rim Opening
+                    ctx.beginPath();
+                    ctx.ellipse(cx, topY, rimVal, rimVal * 0.25, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = '#1C1A19';
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                requestAnimationFrame(renderStudioLoop);
+            }
+
+            renderStudioLoop();
+        }
+
+        function initForm() {
+            const form = document.getElementById('conclaveForm');
+            const select = document.getElementById('regWorkshop');
+            const priceTag = document.getElementById('priceTag');
+
+            select.addEventListener('change', (e) => {
+                const price = e.target.options[e.target.selectedIndex].dataset.price;
+                priceTag.innerText = price == 0 ? "₹0 (Free Pass)" : `₹${price}`;
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('regName').value;
+                const track = select.value;
+                const date = document.getElementById('regDate').value;
+
+                document.getElementById('passName').innerText = name;
+                document.getElementById('passTrack').innerText = track;
+                document.getElementById('passDate').innerText = date;
+                document.getElementById('passBadge').innerText = track.includes('Free') ? 'Free Visitor' : 'Workshop Pass';
+                document.getElementById('passId').innerText = '#NUV-' + Math.floor(1000 + Math.random() * 9000);
+
+                document.getElementById('ticketModal').classList.remove('hidden');
+            });
+        }
+
+        function quickSelectWorkshop(trackTitle, price) {
+            const select = document.getElementById('regWorkshop');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(trackTitle)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('priceTag').innerText = `₹${price}`;
+            document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+            showToast(`Selected: ${trackTitle} Track`);
+        }
+
+        function initModalsAndFaq() {
+            document.getElementById('closeTicketModal').addEventListener('click', () => {
+                document.getElementById('ticketModal').classList.add('hidden');
+            });
+            document.getElementById('closeLightbox').addEventListener('click', () => {
+                document.getElementById('lightboxModal').classList.add('hidden');
+            });
+
+            document.querySelectorAll('.faq-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const ans = btn.nextElementSibling;
+                    ans.classList.toggle('hidden');
+                });
+            });
+
+            document.getElementById('inquiryForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showToast("Inquiry submitted! We will respond shortly.");
+                e.target.reset();
+            });
+        }
+
+        function openLightbox(img, title, desc) {
+            document.getElementById('lightboxImg').src = img;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function downloadPass() {
+            showToast("Event Pass downloaded!");
+            setTimeout(() => {
+                document.getElementById('ticketModal').classList.add('hidden');
+            }, 1000);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
